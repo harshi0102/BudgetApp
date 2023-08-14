@@ -1,0 +1,24 @@
+<%= link_to "Back", :back, class: "btn btn-secondary" %>
+<h1>CATEGORIES</h1>
+
+<% if @categories.any? %>
+  <% @categories.each do |category| %>
+    <div class="category">
+      <div class="category-info">
+      <h2><%= category.name %></h2>
+      <% if category.icon.present? %>
+        <%= tag :img, src: category.icon %>
+      <% end %>
+      <p>Total: <%= category.expenses.sum(:amount) %></p>
+    </div>
+
+    <%= link_to "Add Expenses", new_category_expense_path(category), class: "btn btn-primary" %>
+
+    </div>
+  <% end %>
+
+  <%= link_to "Add a New Category", new_category_path, class: "btn btn-primary" %>
+<% else %>
+  <p>To add a Category, click the button below as none have been added yet.</p>
+  <%= link_to "Add a New Category", new_category_path, class: "btn btn-primary" %>
+<% end %>
