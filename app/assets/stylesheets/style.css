@@ -8,7 +8,7 @@
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-image: url("/assets/backImage.jpg");
+  background-image: url("/assets/backImage2.jpg");
   background-size: cover;
   background-repeat: repeat;
   height: 100vh;
@@ -124,7 +124,7 @@ select {
 }
 
 .home-page {
-  width: fit-content;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -137,25 +137,25 @@ select {
 
 .home-page h1 {
   margin-bottom: 70px;
-  font-size: calc(1rem + 10vmin);
+  font-size: calc(1.2rem + 11vmin);
   font-weight: 900;
-  color: rgb(91, 172, 238);
+  color: rgb(3, 43, 104);
 
   --x-offset: -0.0625em;
   --y-offset: 0.0625em;
   --stroke: 0.025em;
   --background-color: white;
-  --stroke-color: rgb(67, 86, 94);
+  --stroke-color: rgb(56, 72, 78);
 
-  text-shadow: var(--x-offset) var(--y-offset) 0px var(--background-color),
+  text-shadow: var(--x-offset) var(--y-offset) 0 var(--background-color),
     calc(var(--x-offset) - var(--stroke)) calc(var(--y-offset) + var(--stroke))
-      0px var(--stroke-color);
+      0 var(--stroke-color);
 }
 
 @supports (text-shadow: 1px 1px 1px 1px black) {
   h1 {
-    text-shadow: var(--x-offset) var(--y-offset) 0px 0px var(--background-color),
-      var(--x-offset) var(--y-offset) var(--stroke) 0px var(--stroke-color);
+    text-shadow: var(--x-offset) var(--y-offset) 0 0 var(--background-color),
+      var(--x-offset) var(--y-offset) var(--stroke) 0 var(--stroke-color);
   }
 }
 
@@ -167,6 +167,7 @@ select {
   margin-top: 2px;
   padding: 3%;
   width: 100%;
+  border-radius: 6px;
 }
 
 .home-page .btn-primary {
@@ -215,18 +216,6 @@ select {
   background-color: rgb(255, 255, 255);
   border: 3px solid rgb(223, 135, 162);
   border-radius: 6px;
-}
-
-.expenses-card ul {
-  background-color: white;
-  border: 3px solid rgb(24, 105, 226);
-  border-radius: 6px;
-}
-
-.expenses-card ul li {
-  font-size: 1.2rem;
-  color: #595a5c;
-  margin: 0 12px 12px 20px;
 }
 
 .category-name {
@@ -338,8 +327,9 @@ select {
 
 .content h2 {
   padding: 10px 12px;
-  color: #ffffff;
-  background: rgb(218, 151, 191);
+  color: #2c2c2c;
+  background: rgb(131, 195, 247);
+  border: 2px solid rgb(93, 137, 218);
   border-radius: 5px;
   text-align: center;
 }
@@ -361,17 +351,4 @@ select {
 
 .expenses-table th {
   background-color: #f2f2f2;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.btn-danger:hover {
-  background-color: #c82333;
 }
