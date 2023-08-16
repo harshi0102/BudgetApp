@@ -70,8 +70,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+gem 'cancancan'
+gem 'carrierwave', '~> 2.2'
 gem 'devise'
 gem 'pg'
-gem 'carrierwave', '~> 2.2'
-gem 'cancancan'
- 

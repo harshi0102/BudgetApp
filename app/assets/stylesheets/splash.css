@@ -57,7 +57,13 @@ body {
   justify-content: center;
   align-content: center;
   height: 80%;
-  font-family: Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+  font-family:
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
     sans-serif;
   font-size: 4rem;
 }

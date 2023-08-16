@@ -3,7 +3,7 @@ class Devise::SessionsController < DeviseController
 
   def destroy
     sign_out(current_user)
-    flash[:notice] = "Logged out successfully."
+    flash[:notice] = 'Logged out successfully.'
     redirect_to root_path
   end
 
