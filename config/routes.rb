@@ -9,11 +9,18 @@ Rails.application.routes.draw do
     unlock: 'unlock',
     sign_up: 'signup',
     edit: 'edit'
-  }, controllers: { registrations: 'registrations' }
+  }, controllers: { registrations: 'registrations'}
 
   resources :categories, only: [:index, :new, :create] do
     resources :transactions, only: [:index, :new, :create]
   end
+
+  # get "categories", to: "categories#index", as: :home
+  # get "transactions", to: "transactions#transactions_page", as: :transactions
+  # get "categories/new", to: "categories#new", as: :new_category
+  # get "transactions/new", to: "transactions#new", as: :new_transaction
+
+  # post "categories", to: "categories#create"
 
   delete "logout", to: "devise/sessions#destroy", as: :logout
 
