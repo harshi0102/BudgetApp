@@ -10,9 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_15_194538) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_16_081924) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "avatars", force: :cascade do |t|
+    t.string "image"
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_avatars_on_category_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "icon"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "group_operations", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "operation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_operations_on_group_id"
+    t.index ["operation_id"], name: "index_group_operations_on_operation_id"
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -23,6 +49,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_194538) do
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
+  create_table "operations", force: :cascade do |t|
+    t.string "name"
+    t.decimal "amount"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "author_id"
+    t.index ["author_id"], name: "index_operations_on_author_id"
+    t.index ["category_id"], name: "index_operations_on_category_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -30,7 +72,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_15_194538) do
     t.string "email"
     t.string "encrypted_password"
     t.string "picture"
+    t.string "icon"
+    t.string "avatar"
+    t.datetime "rememberable"
+    t.datetime "remember_created_at"
+    t.index ["rememberable"], name: "index_users_on_rememberable"
   end
 
+  add_foreign_key "avatars", "categories"
+  add_foreign_key "categories", "users"
+  add_foreign_key "group_operations", "groups"
+  add_foreign_key "group_operations", "operations"
   add_foreign_key "groups", "users"
+  add_foreign_key "operations", "categories"
+  add_foreign_key "operations", "users", column: "author_id"
 end
