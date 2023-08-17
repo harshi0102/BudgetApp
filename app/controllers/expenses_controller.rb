@@ -21,14 +21,14 @@ class ExpensesController < ApplicationController
 
   # POST /expenses or /expenses.json
   def create
-    puts "Received expense parameters:"
+    puts 'Received expense parameters:'
     p params[:expense]
-  
+
     @expense = Expense.new(expense_params)
     @expense.author_id = current_user.id
-  
+
     @expense.name = @expense.name.capitalize
-  
+
     if @expense.save
       redirect_to group_expenses_path(@group), notice: 'Transaction was successfully created.'
     else

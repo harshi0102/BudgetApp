@@ -9,7 +9,6 @@ class Users::SessionsController < Devise::SessionsController
 
   # ... other actions
 
-  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

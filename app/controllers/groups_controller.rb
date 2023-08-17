@@ -14,15 +14,15 @@ class GroupsController < ApplicationController
 
   # POST /groups or /groups.json
   def create
-  @group = current_user.groups.new(group_params)
-  @group.name = @group.name.capitalize
+    @group = current_user.groups.new(group_params)
+    @group.name = @group.name.capitalize
 
-  if @group.save
-    redirect_to groups_url
-  else
-    render :new, status: :unprocessable_entity
+    if @group.save
+      redirect_to groups_url
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
-end
 
   private
 
