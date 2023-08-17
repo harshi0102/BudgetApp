@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Category, type: :model do
   let(:user) { User.create!(name: 'harshika', email: 'vmmaple2@gmail.com', password: 'password') }
-  let(:category) { Category.create!(user: user, name: 'School', icon: '📚') }
-  let(:expense) { Expense.create!(author: user, name: 'T-shirt', amount: 5, category: category) }
+  let(:category) { Category.create!(user:, name: 'School', icon: '📚') }
+  let(:expense) { Expense.create!(author: user, name: 'T-shirt', amount: 5, category:) }
 
   describe 'validations' do
     it 'is valid with all valid attributes' do

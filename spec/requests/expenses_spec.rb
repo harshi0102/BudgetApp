@@ -4,8 +4,8 @@ RSpec.describe 'Expenses', type: :request do
   include Devise::Test::IntegrationHelpers
 
   let(:user) { User.create!(name: 'John', email: 'john@gmail.com', password: 'password') }
-  let(:category) { Category.create!(user: user, name: 'Food', icon: '🍔') }
-  let(:expense) { Expense.create!(author: user, name: 'Pizza', amount: 150, category: category) }
+  let(:category) { Category.create!(user:, name: 'Food', icon: '🍔') }
+  let(:expense) { Expense.create!(author: user, name: 'Pizza', amount: 150, category:) }
 
   let(:valid_params) { { expense: { category_id: category.id, name: 'Burger', amount: 100 } } }
   let(:invalid_params) { { expense: { category_id: category.id, name: '', amount: 100 } } }
@@ -46,7 +46,7 @@ RSpec.describe 'Expenses', type: :request do
 
   describe 'DELETE /destroy' do
     it 'destroys the requested expense' do
-      new_expense = Expense.create!(author: user, category: category, name: 'Sushi', amount: 30)
+      new_expense = Expense.create!(author: user, category:, name: 'Sushi', amount: 30)
       expect do
         delete category_expense_path(category, new_expense)
       end.to change(Expense, :count).by(-1)

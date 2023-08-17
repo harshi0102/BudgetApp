@@ -4,7 +4,7 @@ RSpec.feature 'Expense Index', type: :feature do
   include Devise::Test::IntegrationHelpers
 
   let!(:user) { User.create!(name: 'harshika', email: 'vmmaple2@gmail.com', password: 'password') }
-  let!(:category) { Category.create!(user: user, name: 'Gym', icon: '🏋️‍♂️') }
+  let!(:category) { Category.create!(user:, name: 'Gym', icon: '🏋️‍♂️') }
 
   before do
     sign_in user
@@ -16,7 +16,7 @@ RSpec.feature 'Expense Index', type: :feature do
 
     category.expenses.each do |expense|
       expect(page).to have_content(expense.name)
-      expect(page).to have_content("$#{sprintf('%.2f', expense.amount)}")
+      expect(page).to have_content("$#{format('%.2f', expense.amount)}")
     end
   end
 

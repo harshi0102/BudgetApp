@@ -4,8 +4,8 @@ RSpec.feature 'Categories Index', type: :feature do
   include Devise::Test::IntegrationHelpers
 
   let!(:user) { User.create!(name: 'harshika', email: 'vmmaple2@gmail.com', password: 'password') }
-  let!(:category1) { Category.create!(user: user, name: 'Food', icon: '🍔') }
-  let!(:category2) { Category.create!(user: user, name: 'Health', icon: '💊') }
+  let!(:category1) { Category.create!(user:, name: 'Food', icon: '🍔') }
+  let!(:category2) { Category.create!(user:, name: 'Health', icon: '💊') }
   let!(:expense1) { Expense.create!(author: user, category: category1, name: 'Burger', amount: 10.0) }
   let!(:expense2) { Expense.create!(author: user, category: category2, name: 'Medicine', amount: 15.0) }
 
@@ -42,7 +42,7 @@ RSpec.feature 'Categories Index', type: :feature do
     Expense.destroy_all # Delete associated expenses first
     Category.destroy_all
     visit categories_path
-    
+
     expect(page).to have_content('No categories found')
     expect(page).to have_link('Scan')
   end

@@ -4,7 +4,7 @@ RSpec.feature 'Expenses New Page', type: :feature do
   include Devise::Test::IntegrationHelpers
 
   let!(:user) { User.create!(name: 'harshika', email: 'vmmaple2@gmail.com', password: 'password') }
-  let!(:category) { Category.create!(name: 'Gym', icon: '🏋️‍♂️', user: user) }
+  let!(:category) { Category.create!(name: 'Gym', icon: '🏋️‍♂️', user:) }
 
   before do
     sign_in user

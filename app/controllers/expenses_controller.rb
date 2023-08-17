@@ -28,7 +28,7 @@ class ExpensesController < ApplicationController
       render :new
     end
   end
-  
+
   def destroy
     @expense = Expense.find(params[:id])
     @expense.destroy

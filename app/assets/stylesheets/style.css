@@ -147,14 +147,16 @@ select {
   --background-color: white;
   --stroke-color: rgb(56, 72, 78);
 
-  text-shadow: var(--x-offset) var(--y-offset) 0 var(--background-color),
+  text-shadow:
+    var(--x-offset) var(--y-offset) 0 var(--background-color),
     calc(var(--x-offset) - var(--stroke)) calc(var(--y-offset) + var(--stroke))
-      0 var(--stroke-color);
+    0 var(--stroke-color);
 }
 
 @supports (text-shadow: 1px 1px 1px 1px black) {
   h1 {
-    text-shadow: var(--x-offset) var(--y-offset) 0 0 var(--background-color),
+    text-shadow:
+      var(--x-offset) var(--y-offset) 0 0 var(--background-color),
       var(--x-offset) var(--y-offset) var(--stroke) 0 var(--stroke-color);
   }
 }
@@ -309,6 +311,7 @@ select {
   border: 1px solid #fff;
   border-radius: 5px;
   width: 90%;
+
   /* background: rgb(223, 135, 162); */
   background-color: green;
 }

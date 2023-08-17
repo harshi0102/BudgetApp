@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Expense, type: :model do
   let(:user) { User.create!(name: 'harshika', email: 'vmmaple2@gmail.com', password: 'password') }
-  let(:category) { Category.create!(user: user, name: 'Food', icon: '🍔') }
-  let(:expense) { Expense.create!(author: user, name: 'Lunch', amount: 6, category: category) }
+  let(:category) { Category.create!(user:, name: 'Food', icon: '🍔') }
+  let(:expense) { Expense.create!(author: user, name: 'Lunch', amount: 6, category:) }
 
   describe 'validations' do
     it 'is not valid if name is not present' do
