@@ -1,34 +1,35 @@
 require 'rails_helper'
 
 RSpec.describe Expense, type: :model do
-  let(:user) { User.create!(name: 'harshika', email: 'vmmaple2@gmail.com', password: 'password') }
-  let(:category) { Category.create!(user:, name: 'Food', icon: '🍔') }
-  let(:expense) { Expense.create!(author: user, name: 'Lunch', amount: 6, category:) }
-
-  describe 'validations' do
-    it 'is not valid if name is not present' do
-      expense.name = nil
-      expect(expense).not_to be_valid
-    end
-
-    it 'is not valid if amount is not present' do
-      expense.amount = nil
-      expect(expense).not_to be_valid
-    end
-
-    it 'is not valid if amount is negative' do
-      expense.amount = -100
-      expect(expense).not_to be_valid
+  describe 'associations' do
+    it 'should have correct associations' do
+      expect(Expense.reflect_on_association(:categorizations).macro).to eq(:has_many)
+      expect(Expense.reflect_on_association(:groups).macro).to eq(:has_many)
+      expect(Expense.reflect_on_association(:author).macro).to eq(:belongs_to)
     end
   end
 
-  describe 'associations' do
-    it 'belongs to a category' do
-      expect(expense.category).to eq(category)
+  describe 'validations' do
+    user = User.create(name: 'Harriet', email: 'exam@email.com', password: 'password',
+                       password_confirmation: 'password')
+
+    subject { Expense.new(name: 'Ball', amount: 30, author_id: user.id) }
+
+    it 'name should be present' do
+      subject.name = nil
+      expect(subject).to_not be_valid
+      expect(subject.errors[:name]).to include("can't be blank")
     end
 
-    it 'belongs to an author (user)' do
-      expect(expense.author).to eq(user)
+    it 'amount should be a number' do
+      subject.amount = 'two'
+      expect(subject).to_not be_valid
+    end
+
+    it 'amount should be greater than or equal to zero' do
+      subject.amount = -1
+      expect(subject).to_not be_valid
+      expect(subject.errors[:amount]).to include('must be greater than or equal to 0')
     end
   end
 end
