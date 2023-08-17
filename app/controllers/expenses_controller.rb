@@ -14,6 +14,8 @@ class ExpensesController < ApplicationController
   end
 
   def create
+    @category = Category.find(params[:expense][:category_id]) # Set the @category variable
+    @categories = current_user.categories # Set the @categories variable
     @expense = @category.expenses.build(expense_params)
     @expense.author = current_user
     @expense.date = Date.parse(params[:expense][:date]) unless params[:expense][:date].nil?
@@ -26,7 +28,7 @@ class ExpensesController < ApplicationController
       render :new
     end
   end
-
+  
   def destroy
     @expense = Expense.find(params[:id])
     @expense.destroy
