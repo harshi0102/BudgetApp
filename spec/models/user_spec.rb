@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
 
   describe 'validations' do
     subject do
-      User.new(name: 'Harriet', email: 'example@email.com', password: 'password', password_confirmation: 'password')
+      User.new(name: 'harshika', email: 'example@email.com', password: 'password', password_confirmation: 'password')
     end
 
     it 'name should be present' do
