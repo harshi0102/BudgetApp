@@ -1,13 +1,11 @@
 Rails.application.routes.draw do
+  resources :groups do
+    resources :expenses
+  end
+  get 'exTrack', to: 'users#landing_page', as: 'exTrack' # Named route
   devise_for :users
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  root 'home#index'
-
-  authenticated :user do
-    root 'categories#index', as: :authenticated_root
-  end
-
-  resources :categories do
-    resources :expenses, only: %i[new create index destroy], on: :member
-  end
+  # Defines the root path route ("/")
+  root "groups#index"
 end

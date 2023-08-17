@@ -4,8 +4,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :categories, dependent: :destroy
-  has_many :expenses, dependent: :destroy
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+  end
 
-  validates :name, presence: true, uniqueness: { case_sensitive: false }
+  has_many :expenses, dependent: :destroy
+  has_many :groups, dependent: :destroy
+
+  validates :name, presence: true
 end

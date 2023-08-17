@@ -1,48 +1,54 @@
 class ExpensesController < ApplicationController
+  before_action :set_expense, only: %i[show edit update destroy]
+  before_action :set_group, only: %i[index new create]
   before_action :authenticate_user!
-  before_action :set_category
 
+  # GET /expenses or /expenses.json
   def index
-    @expenses = @category.expenses
-    @total_amount = @expenses.sum(:amount)
-  end
+    @expenses = @group.expenses.where(author_id: current_user.id).order('created_at Desc')
 
-  def new
-    @category = Category.find(params[:category_id])
-    @categories = current_user.categories
-    @expense = Expense.new
-  end
-
-  def create
-    @category = Category.find(params[:expense][:category_id]) # Set the @category variable
-    @categories = current_user.categories # Set the @categories variable
-    @expense = @category.expenses.build(expense_params)
-    @expense.author = current_user
-    @expense.date = Date.parse(params[:expense][:date]) unless params[:expense][:date].nil?
-
-    if @expense.save
-      flash[:success] = "You've just added a new expense."
-      redirect_to category_expenses_path(@category)
-    else
-      flash.now[:error] = @expense.errors.full_messages.first
-      render :new
+    @total_amount = 0
+    # Loop through expenses and tally amounts
+    @expenses.each do |expense|
+      @total_amount += expense.amount
     end
   end
 
-  def destroy
-    @expense = Expense.find(params[:id])
-    @expense.destroy
-    flash[:success] = 'Expense item has been removed.'
-    redirect_to category_expenses_path
+  # GET groups/group_id/expenses/new
+  def new
+    @expense = Expense.new(group_ids: [params[:group_id]])
+  end
+
+  # POST /expenses or /expenses.json
+  def create
+    puts "Received expense parameters:"
+    p params[:expense]
+  
+    @expense = Expense.new(expense_params)
+    @expense.author_id = current_user.id
+  
+    @expense.name = @expense.name.capitalize
+  
+    if @expense.save
+      redirect_to group_expenses_path(@group), notice: 'Transaction was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
 
-  def set_category
-    @category = current_user.categories.find(params[:category_id])
+  # Use callbacks to share common setup or constraints between actions.
+  def set_expense
+    @expense = Expense.find(params[:id])
   end
 
+  def set_group
+    @group = Group.find(params[:group_id])
+  end
+
+  # Only allow a list of trusted parameters through.
   def expense_params
-    params.require(:expense).permit(:name, :amount, :category_id)
+    params.require(:expense).permit(:name, :amount, group_ids: [])
   end
 end

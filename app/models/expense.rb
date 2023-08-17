@@ -1,13 +1,8 @@
 class Expense < ApplicationRecord
-  belongs_to :category
+  has_many :categorizations, dependent: :destroy
+  has_many :groups, through: :categorizations, dependent: :destroy
   belongs_to :author, class_name: 'User'
 
   validates :name, presence: true
-  validates :category, presence: true
-  validates :amount, presence: true, numericality: { greater_than: 0 }
-  validate :belongs_to_a_category
-
-  def belongs_to_a_category
-    errors.add(:category_id, 'must belong to a category') unless category_id && category
-  end
+  validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
 end

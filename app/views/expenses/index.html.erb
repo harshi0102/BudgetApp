@@ -1,42 +1,28 @@
-<section class="container">
-  <div class="header">
-    <%= link_to categories_path, class: "back" do %>
-      <i class="fas fa-arrow-left"></i>
+<%= stylesheet_link_tag 'registration' %>
+<main>
+  <nav class="register">
+    <%= link_to root_path, class: 'arrow-link' do %>
+      <i class="fa fa-solid fa-arrow-left"></i>
     <% end %>
-    <h1>Details</h1>
-    <%= form_for(current_user, url: destroy_user_session_path, method: :delete, html: { class: "nav-link" }) do |f| %>
-      <%= f.button type: :submit, class: "btn-logout logoutBtn" do %>
-        <i class="fa-solid fa-right-from-bracket"></i>
+    <h2>TRANSACTIONS</h2>
+  </nav>
+
+  <p style="color: green"><%= notice %></p>
+  <div class="total-for-category">
+    <p>Total Amount</p>
+    <p><strong><%= number_to_currency(@total_amount) %></strong></p>
+  </div>
+  <div id="expenses", class="category-container">
+    <% if @expenses.empty? %>
+      <p class="text-center"> <i> No transactions yet </i></p>
+    <% else %>
+      <% @expenses.each do |expense| %>
+        <%= render expense %>
       <% end %>
     <% end %>
   </div>
 
-  <div class="content">
-    <h2>Expenses for <%= @category.name %></h2>
-    <% if @expenses.any? %>
-      <p class="total">Total Amount: $<%= sprintf('%.2f', @total_amount) %></p>
-      <table class="expenses-table">
-        <thead>
-          <tr>
-            <th>Expense</th>
-            <th>Amount</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @expenses.each do |expense| %>
-            <tr>
-              <td><%= expense.name %></td>
-              <td>$<%= sprintf('%.2f', expense.amount) %></td>
-              <td>
-                <%= button_to 'Delete', category_expense_path(@category, expense), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn-danger' %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    <% else %>
-      <p class="msg">No expenses found.</p>
-    <% end %>
+  <div class='button-outline'>
+    <%= link_to "ADD A NEW TRANSACTION", new_group_expense_path, class: 'add-button' %>
   </div>
-</section>
+</main>

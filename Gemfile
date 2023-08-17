@@ -73,5 +73,5 @@ group :test do
   gem 'webdrivers'
 end
 gem 'devise'
-gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.8'
+gem 'font-awesome-rails'
 gem 'pg'
