@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
     if user_signed_in?
       super
     else
-      redirect_to exTrack_path
+      redirect_to budget_path
     end
   end
 end

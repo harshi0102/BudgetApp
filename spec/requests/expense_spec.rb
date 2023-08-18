@@ -27,7 +27,7 @@ RSpec.describe 'Expense', type: :request do
 
       it 'should redirect to splash page' do
         get group_expenses_path(@group)
-        expect(response).to redirect_to(exTrack_path)
+        expect(response).to redirect_to(budget_path)
         expect(response.status).to eq(302)
       end
     end
