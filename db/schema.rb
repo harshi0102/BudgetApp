@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_18_073302) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_18_074614) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -85,6 +85,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_18_073302) do
     t.string "name"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.datetime "remember_created_at"
+    t.index ["remember_created_at"], name: "index_users_on_remember_created_at"
   end
 
   create_table "views", force: :cascade do |t|
