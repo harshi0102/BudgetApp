@@ -25,7 +25,7 @@
 
 Budget App is an expense tracking app that allows user to create new transactions associated with a category and see the money spent on each category.
 
-- [Video Presentation]()
+- [Video Presentation](https://drive.google.com/file/d/1CTxBwazXKYt5FJlvhdWqrrkRXfmyjmpT/view?usp=sharing)
 
 ## :hammer_and_wrench: Built With <a name="built-with"></a>
 
