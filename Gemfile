@@ -75,3 +75,4 @@ end
 gem 'devise'
 gem 'font-awesome-rails'
 gem 'pg'
+gem 'activesupport', '~> 7.0'
