@@ -72,7 +72,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'webdrivers'
 end
+gem 'activesupport', '~> 7.0'
 gem 'devise'
 gem 'font-awesome-rails'
 gem 'pg'
-gem 'activesupport', '~> 7.0'
